@@ -71,3 +71,36 @@ have to wory about collissions. Check the `/app/ui/home.module.css`.
 
 ### `clsx`
 Is a library that allows to toggle or conditionally add class names easily.
+
+## 3. Optimizing Fonts and Images
+Layout shift happens when the browser initally rernders a fallback or system font, and then swaps it
+out for a custom font once it's loaded. This swap cause the text size, spacing, or layout to change,
+shifting elements around it.
+
+The `next/font` module downloads font files at build time and hosts them with other static assets.
+In this way, when a user visits the application, there won't be needed additional  network requests.
+
+Next.js can serve static assetts, like images under the `/public` folder, which can be referenced in
+the application.
+
+Using HTML, you would add an image as follows:
+```html
+<div
+    src="/hero.png"
+    alt="Screenshots from the dashboard project showing desktop version"
+></div>
+
+```
+
+In this way you have to manually:
+- Manage image responsiveness
+- Specify image sizes for different devices
+- Prevent layout shift as the images load
+- Lazy load images thaat are outside of the user's viewport
+
+Instead of consider manual lImage Optimization, you can use the `next/image` (Image) component. The
+\<Image\> component is an extension of the \<img\> tag and comes with automatic immage optimization:
+- Preventing layout shifting when images are loading
+- Resizing images to avoid shipping large images to devices with smaller viewport
+- Lazy loading images (they load as they enter the viewport)
+- Serving images in modern formats like `WebP` and `AVIF`
