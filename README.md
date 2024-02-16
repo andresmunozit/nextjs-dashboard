@@ -99,7 +99,7 @@ In this way you have to manually:
 - Lazy load images thaat are outside of the user's viewport
 
 Instead of consider manual lImage Optimization, you can use the `next/image` (Image) component. The
-\<Image\> component is an extension of the \<img\> tag and comes with automatic immage optimization:
+`<Image>` component is an extension of the `<img>` tag and comes with automatic immage optimization:
 - Preventing layout shifting when images are loading
 - Resizing images to avoid shipping large images to devices with smaller viewport
 - Lazy loading images (they load as they enter the viewport)
@@ -117,3 +117,22 @@ The `/app/page.tsx` file is the home page associated with the `/` route. The
 ### Dashboard Layout
 In Next.js you can use a special `layout.tsx` file to create UI that is shared between multiple
 pages.
+
+## 5. Navigating Between Pages
+Let's add some links to allow users to navigate between the dashboard pages.
+
+### Why optimize navigation
+At the moment the sidebar links use `<a>` elements, which cause a full page refresh on each page
+navigation.
+
+### The `<Link>` component
+The Link component can be used to do `client-side-navigation` with JavaScript.
+
+### Automatic code-splitting and prefetching
+Next.js enhances user experience by automatically splitting code per route, isolating pages to
+ensure the application remains robust. Additionally, it prefetches content for links in view,
+ensuring nearly instant page transitions when users navigate.
+
+### Pattern: Showing active links
+In order to show active links we need to get the user's current path from the URL. We can achieve
+that by using the `usePathname` Next.js hook.
