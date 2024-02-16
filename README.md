@@ -104,3 +104,16 @@ Instead of consider manual lImage Optimization, you can use the `next/image` (Im
 - Resizing images to avoid shipping large images to devices with smaller viewport
 - Lazy loading images (they load as they enter the viewport)
 - Serving images in modern formats like `WebP` and `AVIF`
+
+## 4. Creating Layouts and Pages
+
+### Nested routing
+Next.js uses file-system routing, which means that each folder represent a route segment that maps
+to a URL segment.
+
+The `/app/page.tsx` file is the home page associated with the `/` route. The
+`/app/dashboard/page.tsx` file is associated with the `/dashboard` path.
+
+### Dashboard Layout
+In Next.js you can use a special `layout.tsx` file to create UI that is shared between multiple
+pages.

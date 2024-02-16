@@ -65,7 +65,8 @@ export default function Page() {
             className="block md:hidden"
             alt="Screenshot of the dashboard project showing mobile version"
           />
-          { /* The md: prefix in Tailwind CSS enables responsive design adjustments for medium-sized screens and up. */ }
+          { /* The md: prefix in Tailwind CSS enables responsive design adjustments for medium-sized
+          screens and up. */ }
           { /* Using Tailwind CSS classes hidden md:block for desktop and block md:hidden for mobile
           with Next.js's <Image /> optimizes visibility per device size, ensuring responsive,
           device-optimized image display in web design. */ }

@@ -4,6 +4,8 @@ import '@/app/ui/global.css'
 // Import the next font
 import { inter } from '@/app/ui/fonts'
 
+// This is the RootLayout and it's required. Any UI you add to the root layout will be shared across
+// all pages in the application.
 export default function RootLayout({
   children,
 }: {
