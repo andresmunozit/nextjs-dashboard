@@ -1,6 +1,8 @@
 import AcmeLogo from '@/app/ui/acme-logo';
 import { ArrowRightIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
+// Let's import a CSS module
+import styles from '@/app/ui/home.module.css'
 
 export default function Page() {
   return (
@@ -17,6 +19,16 @@ export default function Page() {
             </a>
             , brought to you by Vercel.
           </p>
+
+          { /* Let's add a div component to this code and style it using Tailwind */ }
+          <div
+            className='h-0 w-0 border-b-[30px] border-l-[20px] border-r-[20px] border-b-black border-l-transparent border-r-transparent'
+          ></div>
+          { /* Now, the same result but using CSS modules */ }
+          <div
+            className={styles.shape}
+          ></div>
+
           <Link
             href="/login"
             className="flex items-center gap-5 self-start rounded-lg bg-blue-500 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-blue-400 md:text-base"

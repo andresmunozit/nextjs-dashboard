@@ -53,3 +53,21 @@ $ npm i
 $ npm run dev
 
 ```
+
+## 2. CSS Styling
+You can import `global.css` in any component of the application, but it's good practice to add it
+to the top level component, which in Next.js is the `/app/layout.tsx` component.
+
+The CSS rules come from the `@tailwind` directives referenced inside `global.css`.
+
+### Tailwind
+Tailwind is a CSS framework that allows us to write utility classes direclty in the TSX markup.
+When using `create-next-app` Next.js will ask if you want to use Tailwind and it will install all
+the necessary dependencies in the application.
+
+### CSS Modules
+Allow you to scope CSS to a component by automatically creating unique class names so you don't
+have to wory about collissions. Check the `/app/ui/home.module.css`.
+
+### `clsx`
+Is a library that allows to toggle or conditionally add class names easily.
