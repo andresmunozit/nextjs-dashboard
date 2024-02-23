@@ -136,3 +136,22 @@ ensuring nearly instant page transitions when users navigate.
 ### Pattern: Showing active links
 In order to show active links we need to get the user's current path from the URL. We can achieve
 that by using the `usePathname` Next.js hook.
+
+
+## 6. Setting Up Your Database
+We have modified the `app/lib/data.ts` file to work with a local Postgres database. Instead of using
+the Velcel database driver we're getting advantage of the `pg` package.
+
+A `docker-compose.yml` file has been created, it contains the configuration for running a local
+Postgres database.
+```sh
+# Running the local database
+$ docker compose up
+
+```
+
+Also you have to update the `.env` file for adding the local database url with the following value:
+```
+POSTGRES_URL=postgresql://postgres:postgres@localhost:5432/postgres
+
+```
