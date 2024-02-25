@@ -67,7 +67,7 @@ the necessary dependencies in the application.
 
 ### CSS Modules
 Allow you to scope CSS to a component by automatically creating unique class names so you don't
-have to wory about collissions. Check the `/app/ui/home.module.css`.
+have to worry about collissions. Check the `/app/ui/home.module.css`.
 
 ### `clsx`
 Is a library that allows to toggle or conditionally add class names easily.
@@ -196,3 +196,41 @@ SQL's versatility and industry-standard status are underscored, along with pract
 advice on using it for targeted data manipulation and fetching. The Vercel Postgres SDK is 
 highlighted for its protection against SQL injections, providing a safe and powerful way to query 
 databases.
+
+## 8. Static and Dynamic Rendering
+The key takeaways from the chapter on Static and Dynamic Rendering in Next.js can be summarized as
+follows:
+
+### Static Rendering
+- Data fetching and rendering occur at build time or during revalidation, allowing the content to be
+cached and distributed through a CDN.
+- Benefits include faster website load times, reduced server load, and improved SEO.
+- Ideal for pages with unchanging content or content shared across users, but not suitable for
+applications like dashboards with regularly updated, personalized data.
+
+### Dynamic Rendering
+- Content is rendered on the server for each user at request time, enabling the display of 
+real-time or frequently updated data.
+- Allows for personalized content and the use of request-time information like cookies or URL 
+search parameters.
+- Essential for applications where data changes frequently or personalization is critical.
+
+### Making Dashboards Dynamic
+- By default, @vercel/postgres does not set caching semantics, allowing for flexible static and 
+dynamic rendering adjustments.
+- Using `unstable_noStore` from `next/cache` in data fetching functions prevents caching, opting 
+out of static rendering for dynamic content updates.
+- Note: `unstable_noStore` is experimental and may change. For stable projects, consider using the 
+Segment Config Option for dynamic rendering.
+
+### Simulating Slow Data Fetch
+- Demonstrates the impact of a slow data fetch on dynamic rendering, where the application's speed 
+is limited by the slowest data fetch.
+- An artificial delay in fetching data can significantly affect page load times, emphasizing the 
+importance of optimizing data retrieval for dynamic content.
+
+### Conclusion
+- Understanding and appropriately applying static and dynamic rendering techniques can 
+significantly enhance application performance and user experience.
+- Developers must choose the right rendering strategy based on content type, update frequency, and 
+personalization requirements to balance performance and dynamic content needs.
