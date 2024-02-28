@@ -234,3 +234,71 @@ importance of optimizing data retrieval for dynamic content.
 significantly enhance application performance and user experience.
 - Developers must choose the right rendering strategy based on content type, update frequency, and 
 personalization requirements to balance performance and dynamic content needs.
+
+## 9. Streaming
+This chapter is about optimizing the user experience when there are slow data requests.
+
+### What is Streaming?
+Streaming can be used to load the page in chunks (such as React components), so the user can
+interact with parts of the application without waiting for all the data to be load before any UI
+can be shown to the user.
+
+Streaming can be implemented at page level, with the `loading.tsx` file, or for specific components
+with `<Suspense>`.
+
+`loading.tsx` file is a special file in Next.js built on top of Suspense. It allows to create a
+fallback UI.
+
+### Fix the loading skeleton bug with route groups
+Route groups can be used to organize files into logical groups without affecting the URL path
+structure.
+
+With the current structure, the `loading.tsx` file is being applied also to the customers and
+invoices pages: 
+```
+├── app
+│   ├── dashboard
+│   │   ├── customers
+│   │   ├── invoices
+│   │   ├── layout.tsx
+│   │   ├── loading.tsx
+│   │   └── page.tsx
+
+```
+
+With the following configuration, `loading.tsx` only applies to the dashboard page:
+```
+├── app
+│   ├── dashboard
+│   │   ├── customers
+│   │   │   └── page.tsx
+│   │   ├── invoices
+│   │   │   └── page.tsx
+│   │   ├── layout.tsx
+│   │   └── (overview)
+│   │       ├── loading.tsx
+│   │       └── page.tsx
+
+```
+
+### Streaming a component
+Suspense allows you to defer rendering parts of the application until some condition is met. You can
+wrap your dynamic components with Suspense. In order to do so, we need to transfer any data fetching
+data to the component.
+
+### Summary: Effective Use of Suspense Boundaries
+
+#### Considerations for Suspense Placement
+- **User Experience:** Optimize how users perceive page loading.
+- **Content Prioritization:** Decide which content loads first.
+- **Data Fetching Dependencies:** Identify if components need data fetching.
+
+#### Strategies
+- **Whole Page Streaming:** Can lead to longer load times for slow-fetching components.
+- **Individual Component Streaming:** May cause UI elements to appear abruptly.
+- **Section Streaming:** Balances loading by grouping components, requiring wrapper components.
+
+#### Recommendations
+- Move data fetching to relevant components and use Suspense for encapsulation.
+- Experiment with different strategies to find what best suits the application's needs.
+- No single correct approach; varies based on application requirements.
