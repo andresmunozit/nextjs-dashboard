@@ -302,3 +302,33 @@ data to the component.
 - Move data fetching to relevant components and use Suspense for encapsulation.
 - Experiment with different strategies to find what best suits the application's needs.
 - No single correct approach; varies based on application requirements.
+
+## 11. Adding Search and Pagination
+### Key Takeaways
+
+#### Overview
+In this guide, we're enhancing the `/invoices` page of our Next.js dashboard by adding search and pagination functionalities using URL search params. This approach provides bookmarkable URLs, supports server-side rendering for initial loads, and simplifies analytics tracking.
+
+#### Technologies and Patterns
+- **Next.js APIs**: Utilize `useSearchParams`, `usePathname`, and `useRouter` for managing URL parameters and navigation.
+- **URL Search Params**: Implement search and pagination by manipulating URL parameters, offering bookmarkable states and seamless server-side data fetching.
+- **Client and Server Components**: Distinguish between components that run on the client side, which can use event listeners and hooks, versus server components that fetch and render data.
+
+#### Implementation Steps
+
+##### Search Functionality
+1. **Capture User Input**: Use a `handleSearch` function within the `<Search>` component to update the URL with user search terms.
+2. **Update URL**: Leverage `useSearchParams` to modify the URL's query parameters based on the search input.
+3. **Sync URL and Input**: Ensure the input field reflects the current search query from the URL, facilitating shared links to specific searches.
+4. **Update Display**: Pass the current search query to components like `<Table>`, which then fetches and displays the relevant data.
+
+##### Pagination
+1. **Modify Page Component**: Fetch the total number of pages based on the search query and current pagination, using a server-side function.
+2. **Update Pagination Component**: Use `usePathname` and `useSearchParams` within the `<Pagination>` component to navigate between pages without exposing database secrets.
+
+#### Best Practices
+- **Debouncing**: Implement debouncing to limit the rate of data fetching operations triggered by user input, improving performance and resource usage.
+- **Separation of Concerns**: Differentiate between client-side and server-side logic for handling URL parameters and data fetching to maintain a clean architecture.
+
+### Conclusion
+By employing URL search params and Next.js APIs, we've added robust search and pagination features to our dashboard. These enhancements not only improve the user experience but also align with best practices for web development in React-based applications.
