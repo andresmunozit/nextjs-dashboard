@@ -13,7 +13,8 @@ This project folder was created as follows:
 ```
 # --example [name]|[github-url]: An example to bootstrap the app with.
 # --use-npm: Explicitly tell the CLI to bootstrap the application using npm
-$ npx create-next-app@latest nextjs-dashboard --use-npm --example "https://github.com/vercel/next-learn/tree/main/dashboard/starter-example"
+$ npx create-next-app@latest nextjs-dashboard --use-npm --example 
+"https://github.com/vercel/next-learn/tree/main/dashboard/starter-example"
 
 ```
 
@@ -307,31 +308,46 @@ data to the component.
 ### Key Takeaways
 
 #### Overview
-In this guide, we're enhancing the `/invoices` page of our Next.js dashboard by adding search and pagination functionalities using URL search params. This approach provides bookmarkable URLs, supports server-side rendering for initial loads, and simplifies analytics tracking.
+In this guide, we're enhancing the `/invoices` page of our Next.js dashboard by adding search and 
+pagination functionalities using URL search params. This approach provides bookmarkable URLs, 
+supports server-side rendering for initial loads, and simplifies analytics tracking.
 
 #### Technologies and Patterns
-- **Next.js APIs**: Utilize `useSearchParams`, `usePathname`, and `useRouter` for managing URL parameters and navigation.
-- **URL Search Params**: Implement search and pagination by manipulating URL parameters, offering bookmarkable states and seamless server-side data fetching.
-- **Client and Server Components**: Distinguish between components that run on the client side, which can use event listeners and hooks, versus server components that fetch and render data.
+- **Next.js APIs**: Utilize `useSearchParams`, `usePathname`, and `useRouter` for managing URL 
+parameters and navigation.
+- **URL Search Params**: Implement search and pagination by manipulating URL parameters, offering 
+bookmarkable states and seamless server-side data fetching.
+- **Client and Server Components**: Distinguish between components that run on the client side, 
+which can use event listeners and hooks, versus server components that fetch and render data.
 
 #### Implementation Steps
 
 ##### Search Functionality
-1. **Capture User Input**: Use a `handleSearch` function within the `<Search>` component to update the URL with user search terms.
-2. **Update URL**: Leverage `useSearchParams` to modify the URL's query parameters based on the search input.
-3. **Sync URL and Input**: Ensure the input field reflects the current search query from the URL, facilitating shared links to specific searches.
-4. **Update Display**: Pass the current search query to components like `<Table>`, which then fetches and displays the relevant data.
+1. **Capture User Input**: Use a `handleSearch` function within the `<Search>` component to update 
+the URL with user search terms.
+2. **Update URL**: Leverage `useSearchParams` to modify the URL's query parameters based on the 
+search input.
+3. **Sync URL and Input**: Ensure the input field reflects the current search query from the URL, 
+facilitating shared links to specific searches.
+4. **Update Display**: Pass the current search query to components like `<Table>`, which then 
+fetches and displays the relevant data.
 
 ##### Pagination
-1. **Modify Page Component**: Fetch the total number of pages based on the search query and current pagination, using a server-side function.
-2. **Update Pagination Component**: Use `usePathname` and `useSearchParams` within the `<Pagination>` component to navigate between pages without exposing database secrets.
+1. **Modify Page Component**: Fetch the total number of pages based on the search query and current 
+pagination, using a server-side function.
+2. **Update Pagination Component**: Use `usePathname` and `useSearchParams` within the 
+`<Pagination>` component to navigate between pages without exposing database secrets.
 
 #### Best Practices
-- **Debouncing**: Implement debouncing to limit the rate of data fetching operations triggered by user input, improving performance and resource usage.
-- **Separation of Concerns**: Differentiate between client-side and server-side logic for handling URL parameters and data fetching to maintain a clean architecture.
+- **Debouncing**: Implement debouncing to limit the rate of data fetching operations triggered by 
+user input, improving performance and resource usage.
+- **Separation of Concerns**: Differentiate between client-side and server-side logic for handling 
+URL parameters and data fetching to maintain a clean architecture.
 
 ### Conclusion
-By employing URL search params and Next.js APIs, we've added robust search and pagination features to our dashboard. These enhancements not only improve the user experience but also align with best practices for web development in React-based applications.
+By employing URL search params and Next.js APIs, we've added robust search and pagination features 
+to our dashboard. These enhancements not only improve the user experience but also align with best 
+practices for web development in React-based applications.
 
 ## Chapter 12: Mutating Data
 
@@ -386,3 +402,58 @@ a manual page reload.
 This chapter demonstrates the power of React Server Actions in building interactive and secure web 
 applications with Next.js. By embracing server-side logic for data mutations, developers can create 
 more efficient, secure, and user-friendly web experiences.
+
+## Chapter 13: Handling Errors
+
+In Chapter 13, we explore strategies for handling errors gracefully in web applications using 
+JavaScript's `try/catch` statements and Next.js APIs. Effective error handling ensures a robust 
+user experience by providing fallback UIs and clear messages when things go wrong.
+
+### Key Takeaways
+
+- **Implementing `try/catch` in Server Actions**: Use `try/catch` blocks within Server Actions to 
+gracefully handle errors. Ensure to call `redirect` outside the `try/catch` to avoid catching 
+redirect errors as general exceptions.
+- **Using `error.tsx` for Fallback UIs**: Create a special `error.tsx` file to define a UI boundary 
+for route segments, serving as a catch-all for unexpected errors and displaying a fallback UI to 
+users.
+- **Handling 404 Errors with `notFound`**: Utilize the `notFound` function to handle 404 errors for 
+resources that don't exist, providing a clear message to the user and improving the overall user 
+experience.
+
+### Graceful Error Handling Techniques
+
+1. **Adding `try/catch` to Server Actions**: Encapsulate logic in Server Actions within `try/catch` 
+blocks to catch and handle errors locally. Use `redirect` judiciously to navigate away from error 
+states only when operations succeed.
+
+2. **Centralized Error Handling with `error.tsx`**:
+- Implement an `error.tsx` file within your route segments to act as an error boundary.
+- This component should accept `error` and `reset` props, displaying an error message and 
+providing a means to recover from errors.
+- Utilize client-side logging or error reporting services within this component to capture error 
+details.
+
+3. **Specific 404 Error Handling with `notFound`**:
+    - Use the `notFound` function to specifically handle cases where resources do not exist (404 
+errors), providing a more targeted response than general error handling.
+    - Implement a `not-found.tsx` file to display a custom 404 message, guiding users back to valid 
+application routes or actions.
+
+### Implementing Error Handling
+
+- **Server Actions**: Incorporate `try/catch` blocks in Server Actions to gracefully manage 
+exceptions, ensuring actions like `deleteInvoice` handle errors in a user-friendly manner.
+- **Fallback UI with `error.tsx`**:
+    - Define a catch-all error boundary using `error.tsx` in relevant route segments.
+    - Display a generic error message with a retry button to attempt recovery.
+- **404 Error Page**:
+    - Leverage `notFound` in route-specific logic to detect and respond to 404 scenarios.
+    - Create a `not-found.tsx` component to provide a clear, actionable message to users attempting 
+to access nonexistent resources.
+
+### Conclusion
+Chapter 13 emphasizes the importance of thoughtful error handling in web applications. By 
+integrating `try/catch` in Server Actions, utilizing Next.js's `error.tsx` and `notFound` for 
+fallback UIs and specific error messages, developers can significantly enhance user experience 
+during error states.

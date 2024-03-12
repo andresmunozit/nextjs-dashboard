@@ -29,11 +29,17 @@ export async function createInvoice(formData: FormData) {
   const amountInCents = amount * 100;
   const date = new Date().toISOString().split('T')[0];
 
-  // Now let's insert the data into our database
-  await client.query(`
-    INSERT INTO invoices (customer_id, amount, status, date)
-    VALUES ($1, $2, $3, $4);
-  `, [customerId, amountInCents, status, date]);
+  try {
+    // Now let's insert the data into our database
+    await client.query(`
+      INSERT INTO invoices (customer_id, amount, status, date)
+      VALUES ($1, $2, $3, $4);
+    `, [customerId, amountInCents, status, date]);
+  } catch (error) {
+    return {
+      message: 'Database Error: Failed to create an invoice',
+    }
+  }
 
   // Once the database has been updated, the /dashboard/invoices path will be revalidated, and fresh
   // data will be fetched from the server.
@@ -51,22 +57,37 @@ export async function updateInvoice(id: string, formData: FormData) {
   });
 
   const amountInCents = amount * 100
-
-  await client.query(`
-    UPDATE invoices
-    SET customer_id = $1, amount = $2, status = $3
-    WHERE id = $4;
-  `, [customerId, amountInCents, status, id]);
+  try {
+    await client.query(`
+      UPDATE invoices
+      SET customer_id = $1, amount = $2, status = $3
+      WHERE id = $4;
+    `, [customerId, amountInCents, status, id]);
+  } catch (error) {
+    return {
+      message: 'Database Error: Failed to update invoice',
+    }
+  }
 
   revalidatePath('/dashboard/invoices')
   redirect('/dashboard/invoices')
 }
 
 export async function deleteInvoice(id: string) {
-  await client.query(`
-    DELETE FROM invoices
-    WHERE id = $1;
-  `, [id]);
-  
+  // In this case we'll get an Unhandled Runtime Error in the browser, when trying to delete an
+  // invoice
+  // throw new Error('Failed to Delete Invoice');
+
+  try {
+    await client.query(`
+      DELETE FROM invoices
+      WHERE id = $1;
+    `, [id]);
+  } catch (error) {
+    return {
+      message: 'Database Error: Failed to delete invoice.',
+    }
+  }
+
   revalidatePath('/dashboard/invoices');
 }
