@@ -29,12 +29,11 @@ const links = [
 ];
 
 export default function NavLinks() {
+  // Next.js provides a hook called usePathname() that you can use to check the path
+  const pathname = usePathname();
   return (
     <>
       {links.map((link) => {
-        // Now get the pathname inside this component
-        const pathname = usePathname()
-
         const LinkIcon = link.icon;
         return (
           /* <a
