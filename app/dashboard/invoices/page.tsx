@@ -6,6 +6,14 @@ import { lusitana } from '@/app/ui/fonts';
 import { InvoicesTableSkeleton } from '@/app/ui/skeletons';
 import { Suspense } from 'react';
 import { fetchInvoicesPages } from '@/app/lib/data';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  // The following way is valid, but it will require to replace the company name in every page if it
+  // changes, so we're going to add a metadata template at /app/layout.tsx
+  // title: 'Invoices | Acme Dashboard',
+  title: 'Invoices',
+};
  
 export default async function Page({
   searchParams

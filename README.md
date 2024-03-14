@@ -568,3 +568,62 @@ Chapter 15 equips developers with the tools and knowledge to implement robust au
 Next.js applications. By following these guidelines, developers can ensure their applications are 
 secure, user-friendly, and accessible, providing a solid foundation for building web applications 
 that require user authentication.
+
+## 16. Adding Metadata
+
+### Overview
+This chapter emphasizes the importance of metadata in enhancing SEO and shareability of webpages. 
+Metadata, which resides within the HTML's `<head>` section, is pivotal for search engines and 
+social media platforms to better understand and display content from webpages.
+
+### Key Concepts
+- **Definition**: Metadata provides detailed information about a webpage's content, crucial for SEO 
+and improving the webpage's representation on social media.
+- **Importance**: It aids in better indexing by search engines and enhances the appearance of links 
+on social media, contributing to higher engagement and traffic.
+
+### Types of Metadata
+- **Title Metadata**: Defines the webpage's title shown on browser tabs, essential for SEO.
+- **Description Metadata**: Offers a brief overview of the webpage, often used in search results.
+- **Keyword Metadata**: Contains relevant keywords for search indexing.
+- **Open Graph Metadata**: Improves link representation on social media with title, description, 
+and images.
+- **Favicon Metadata**: Links a small icon to the webpage, visible in browser tabs.
+
+### Implementing Metadata in Next.js
+Next.js facilitates metadata addition through:
+- **Config-based**: Defining a static or dynamic metadata object in layout or page files.
+- **File-based**: Utilizing special files (e.g., `favicon.ico`, `opengraph-image.jpg`) in the 
+`/public` folder for icons and social media images.
+
+### Practical Steps
+1. **Favicon and Open Graph Images**: Place `favicon.ico` and `opengraph-image.jpg` in the `/app` 
+folder's root for automatic recognition by Next.js.
+2. **Page Titles and Descriptions**: Use the `Metadata` API to define titles and descriptions in 
+`layout.tsx` or specific page files, enhancing individual page SEO.
+
+### Dynamic Metadata
+- **Dynamic OG Images**: Create using the `ImageResponse` constructor.
+- **Page-specific Titles**: Override default titles by specifying metadata in page files. Utilize 
+`title.template` in `layout.tsx` for consistent application naming.
+
+### Example: Metadata Object in Root Layout
+```tsx
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Acme Dashboard',
+  description: 'The official Next.js Course Dashboard, built with App Router.',
+  metadataBase: new URL('https://next-learn-dashboard.vercel.sh'),
+};
+
+```
+
+### Best Practices
+Ensure metadata accurately reflects the page content for better SEO performance.
+Regularly update metadata to keep it relevant with content changes and keyword optimization.
+
+#### Conclusion
+Metadata is a fundamental aspect of web development that significantly impacts SEO and social media 
+engagement. Next.js provides an efficient and straightforward approach to managing metadata, 
+offering both config-based and file-based solutions to cater to different needs.

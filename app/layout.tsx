@@ -3,6 +3,16 @@ import '@/app/ui/global.css'
 
 // Import the next font
 import { inter } from '@/app/ui/fonts'
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: {
+    template: '%s | Acme Dashboard',
+    default: 'Acme Dashboard',
+  },
+  description: 'The official Next.js Course Dashboard, built with App Router',
+  metadataBase: new URL('https://next-learn-dashboard.vercel.sh'),
+};
 
 // This is the RootLayout and it's required. Any UI you add to the root layout will be shared across
 // all pages in the application.
